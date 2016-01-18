@@ -24,4 +24,5 @@ connection.on 'ready', ->
         token: secrets.mq.token
 
       console.log calculatedLoan
-      connection.publish secrets.mq.destinationQueue, calculatedLoan
+      if loan.isValid()
+        connection.publish secrets.mq.destinationQueue, calculatedLoan
