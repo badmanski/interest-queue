@@ -27,6 +27,8 @@ class Loan
     return 0 unless @isValid()
     Math.round((@interestPerDay().reduce (t, s) -> t + s) * 100) / 100
 
-  totalAmount: -> @amount + @totalInterest()
+  totalAmount: ->
+    return 0 unless @isValid()
+    Math.round((@amount + @totalInterest()) * 100) / 100
 
 module.exports = Loan
