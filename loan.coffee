@@ -12,7 +12,7 @@ class Loan
 
   isValid: ->
     !!@amount && !!@duration &&
-      @amount > 0 && @duration > 0
+      @amount >= 0 && @duration >= 0
 
   interestPerDay: ->
     interestAmounts = []
