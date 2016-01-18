@@ -3,8 +3,13 @@ class Loan
     @amount = opts.amount
     @duration = opts.duration
 
+  isValid: ->
+    !!@amount && !!@duration &&
+      @amount > 0 && @duration > 0
+
   interestPerDay: ->
     interestAmounts = []
+    return interestAmounts unless @isValid()
     for day in [1..@duration]
       interestAmount = Math.round(@amount * @interestForDay(day) * 100) / 100
       interestAmounts.push interestAmount
@@ -19,6 +24,7 @@ class Loan
       else 0.04
 
   totalInterest: ->
+    return 0 unless @isValid()
     Math.round((@interestPerDay().reduce (t, s) -> t + s) * 100) / 100
 
   totalAmount: -> @amount + @totalInterest()
