@@ -6,7 +6,8 @@ class Loan
   interestPerDay: ->
     interestAmounts = []
     for day in [1..@duration]
-      interestAmounts.push @amount * @interestForDay(day)
+      interestAmount = Math.round(@amount * @interestForDay(day) * 100) / 100
+      interestAmounts.push interestAmount
 
     interestAmounts
 
@@ -18,7 +19,7 @@ class Loan
       else 0.04
 
   totalInterest: ->
-    @interestPerDay().reduce (t, s) -> t + s
+    Math.round((@interestPerDay().reduce (t, s) -> t + s) * 100) / 100
 
   totalAmount: -> @amount + @totalInterest()
 
