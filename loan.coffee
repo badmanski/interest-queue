@@ -11,8 +11,8 @@ class Loan
     @duration = opts.duration
 
   isValid: ->
-    !!@amount && !!@duration &&
-      @amount >= 0 && @duration >= 0
+    !isNaN(@amount) && !isNaN(@duration) &&
+      @amount >= 0 && @duration > 0
 
   interestPerDay: ->
     interestAmounts = []
